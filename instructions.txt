@@ -23,3 +23,22 @@ This above templete actually using bootstrap
 let get this bootstrap in
 
 We have added bootstrap file in the templete
+
+
+Lets setup git repo
+Bcause always good to setup git repos first
+
+
+OMG this templet is using jquery 
+
+But we already included Bootstrap 5.x. and BS5.x does not support JQuery
+
+My Model is not working because i am using BS 5.
+
+in BS 5 you have to change 
+	1. data-toggle to data-bs-toggle
+	2. data-dismiss to data-bs-dismiss
+
+
+
+
