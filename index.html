@@ -44,83 +44,10 @@
                 </span>
               </th>
               <th>Name</th>
-              <th>Email</th>
-              <th>Address</th>
-              <th>Phone</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <span class="custom-checkbox">
-                  <input
-                    type="checkbox"
-                    id="checkbox1"
-                    name="options[]"
-                    value="1"
-                  />
-                  <label for="checkbox1"></label>
-                </span>
-              </td>
-              <td>Thomas Hardy</td>
-              <td>thomashardy@mail.com</td>
-              <td>89 Chiaroscuro Rd, Portland, USA</td>
-              <td>(171) 555-2222</td>
-              <td>
-                <a href="#editEmployeeModal" class="edit" data-bs-toggle="modal"
-                  ><i class="material-icons" data-bs-toggle="tooltip" title="Edit"
-                    >&#xE254;</i
-                  ></a
-                >
-                <a
-                  href="#deleteEmployeeModal"
-                  class="delete"
-                  data-bs-toggle="modal"
-                  ><i
-                    class="material-icons"
-                    data-bs-toggle="tooltip"
-                    title="Delete"
-                    >&#xE872;</i
-                  ></a
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span class="custom-checkbox">
-                  <input
-                    type="checkbox"
-                    id="checkbox2"
-                    name="options[]"
-                    value="1"
-                  />
-                  <label for="checkbox2"></label>
-                </span>
-              </td>
-              <td>Dominique Perrier</td>
-              <td>dominiqueperrier@mail.com</td>
-              <td>Obere Str. 57, Berlin, Germany</td>
-              <td>(313) 555-5735</td>
-              <td>
-                <a href="#editEmployeeModal" class="edit" data-bs-toggle="modal"
-                  ><i class="material-icons" data-bs-toggle="tooltip" title="Edit"
-                    >&#xE254;</i
-                  ></a
-                >
-                <a
-                  href="#deleteEmployeeModal"
-                  class="delete"
-                  data-bs-toggle="modal"
-                  ><i
-                    class="material-icons"
-                    data-bs-toggle="tooltip"
-                    title="Delete"
-                    >&#xE872;</i
-                  ></a
-                >
-              </td>
-            </tr>
           </tbody>
         </table>
         <div class="clearfix">
@@ -204,20 +131,8 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" required />
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" required />
-              </div>
-              <div class="form-group">
-                <label>Address</label>
+                <label>Content</label>
                 <textarea class="form-control" required></textarea>
-              </div>
-              <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" required />
               </div>
             </div>
             <div class="modal-footer">
@@ -227,7 +142,7 @@
                 data-bs-dismiss="modal"
                 value="Cancel"
               />
-              <input type="submit" class="btn btn-info" value="Save" />
+              <input type="submit" class="btn btn-info update" value="Save" />
             </div>
           </form>
         </div>
@@ -262,7 +177,7 @@
                 data-bs-dismiss="modal"
                 value="Cancel"
               />
-              <input type="submit" class="btn btn-danger" value="Delete" />
+              <input type="submit" class="btn btn-danger delete" value="Delete" />
             </div>
           </form>
         </div>
@@ -272,5 +187,156 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="./js/script.js"></script>
+
+    <script>
+        let baseUrl = 'http://localhost:1337'; //this is our base address
+        fetch(baseUrl+'/api/todos')
+        .then((res)=>{ return res.json() })
+        .then((data)=>{
+            console.log(data.data);
+
+            //lets get inside this object
+            //now we are getting an Array of object
+
+            //we can iterate over array of objects using foreach
+
+            //array.forEach(function(currentValue, index, arr), thisValue)
+
+            // data.data  === our array
+
+            //so 
+            // cv = currentValue, idx = index, arr = array
+            // lets collect the data
+            //start with an empty variable string
+            var tr = '';
+            data.data.forEach((cv,idx,arr)=>{
+                //we cant use is single qoute
+                //we must have to use backtiqe qoutes
+                // I am doig step by step
+                console.log(cv.id)
+                console.log(cv.attributes.content)
+                tr += `<tr>
+                            <td>
+                            <span class="custom-checkbox">
+                                <input
+                                type="checkbox"
+                                id="checkbox1"
+                                name="options[]"
+                                value="`+(cv.id)+`"
+                                />
+                                <label for="checkbox1"></label>
+                            </span>
+                            </td>
+                            <td>`+ cv.attributes.content +`</td>
+                            <td>
+                            <a 
+                                href="#editEmployeeModal"
+                                class="edit"
+                                data-bs-toggle="modal"
+                                data-id="`+(cv.id)+`"
+                                onclick="handleClick(this)"
+                                ><i class="material-icons" data-bs-toggle="tooltip" title="Edit"
+                                >&#xE254;</i
+                                ></a
+                            >
+                            <a
+                                href="#deleteEmployeeModal"
+                                class="delete"
+                                data-id="`+(cv.id)+`"
+                                onclick="handleClick(this,'delete')"
+                                data-bs-toggle="modal"
+                                ><i
+                                class="material-icons"
+                                data-bs-toggle="tooltip"
+                                title="Delete"
+                                >&#xE872;</i
+                                ></a
+                            >
+                            </td>
+                        </tr>`
+            }); // I am using here a fat arrow function
+
+
+            var tbody = document.querySelector('tbody');
+            console.log(tbody);
+
+            //we will use innerHTML property 
+            tbody.innerHTML = tr
+
+        })
+        .catch((e)=>{
+            console.log('error',e);
+        });
+        var elm = '';
+        function handleClick(element,action='edit'){
+            console.log(action);
+            
+            console.log(element.closest('tr'));
+            var elm = element.closest('tr');
+            console.log(element.closest('tr').querySelector('td:nth-child(2)').innerHTML);
+            var content = element.closest('tr').querySelector('td:nth-child(2)').innerHTML
+            console.log(element.getAttribute('data-id'));
+            var id = element.getAttribute('data-id');
+            
+            //Lets save the id in localstorage
+            localStorage.setItem('id',id);
+            localStorage.setItem('content',content);
+
+            if(action === 'delete'){
+                
+            }
+            if(action === 'edit'){
+                var content = localStorage.getItem('content');
+                console.log('content',content);
+                document.querySelector('div#editEmployeeModal textarea').innerHTML = content;
+            }
+        }
+        document.querySelector('input.update').onclick = (e)=>{
+            e.preventDefault(); //stop the reloading
+            console.log('Testing');
+            
+            var content = e.target.closest('form').querySelector('textarea').innerHTML;
+            console.log('textarea content',content);
+            let updateObject = {
+                "data": {
+                  "content":content
+                }
+            }
+
+            fetch(baseUrl+`/api/todos/`+localStorage.getItem('id'),{
+                method:"PUT",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body:JSON.stringify(updateObject)
+            })
+            .then(res=>res.json()) // JSON Parsing
+            .then(data=>{
+                console.log(data);
+            }) //parsed data
+            .catch(e=>console.log(e));
+
+
+        }
+        document.querySelector('input.delete').onclick = function(e){
+            //Page is reloading here...
+            //Stoped the page reloading....
+            console.log(e.target);
+            
+            e.preventDefault();
+               
+            fetch(baseUrl + '/api/todos/'+localStorage.getItem('id'),{
+                method:"DELETE"
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+                e.target.closest('div#deleteEmployeeModal').remove();
+            })
+            .catch(e=>console.log(e));
+            
+            console.log('OK');
+        }
+    </script>
 </body>
 </html>

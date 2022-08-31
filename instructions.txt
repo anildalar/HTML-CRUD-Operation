@@ -1,7 +1,7 @@
 HTML CRUD Operation with Pure Javascript
 
 We need
-1. Ready Made HTML Template with form and table
+1. Ready Made HTML Template with form and table (Done)
 2. Some Rest API (We will use Strapi)
 
 Lets get started guys :)
@@ -38,6 +38,236 @@ My Model is not working because i am using BS 5.
 in BS 5 you have to change 
 	1. data-toggle to data-bs-toggle
 	2. data-dismiss to data-bs-dismiss
+
+
+Guys my HTML template is now ready
+
+I have also started the CI/CD pipeline so that this can be accessed anywhere in the world with a public address
+
+Lets wait
+
+
+https://anildalar.github.io/HTML-CRUD-Operation/
+this is the public address
+
+Now lets start our Part 2
+
+2. We need SOME CRUD Rest API
+
+SO what is the Strapi.?
+
+Stapi is a headless CMS  (Content Management SYstem) which can provide us ready made REST APIs.
+
+Lets Start with STRAPI
+
+https://strapi.io/
+
+This is the official website
+
+We can setup a strapi project with this command
+
+npx create-strapi-app@latest htmlcrudproject
+
+htmlcrudproject = the project name
+
+Choose the quick project
+Make sure you have installed nodeJS between 12.x= > to <=16.x
+
+It will take time guys
+Lets wait for a while
+:)
+You need to have a very good internet connection for this :)
+
+I have 1000 Mbps connection
+
+Hurrey We have done installation with strapi 
+
+Lets setup
+
+We will create a ToDO APP
+
+First Create a Collection Type
+
+Go inside the Content Type Builder
+Create new collection type
+
+Name it as TODO
+
+Click on Continue
+
+Now select the field
+
+Select a text field
+
+You can name it as anything you like
+
+i will call it as "Content"
+Make this as required field
+
+No click on save
+
+Yup our collection is now created
+
+let click on the Content manager
+
+Insert some content
+
+Remember one thing
+
+1. Save and then dont forget to publish it
+
+Now what we need ?
+
+We Need API Right ?
+
+Let me show how you can get it
+
+Go to setting
+
+Go to roles
+
+Click on the public edit pencil icon
+
+Selec the permission for TODO content type
+
+Click on the select All
+
+Save it
+
+Now let check the api
+
+We need to have postam for API Testing
+
+Open the Postman
+
+Lets create a Postman collection to organize all the api in one place
+
+Click on add a request
+
+No lets install the strapi documentation plugin 
+
+
+npm run strapi install documentation
+
+stop the strapi
+by pressing Ctrl + C
+
+install the documentaion
+
+we will run this command in bash terminal not the window terminal
+
+
+Yup we have install the documentation plugin
+
+Now we have complete documentation
+
+
+YEs our both thing are setup correcctly
+
+1. HTML CURD template
+2. Some API (We are using Strapi for this)
+
+So Lets start
+
+Lets save all the request in the collection
+
+CREATE - Done
+
+I have also save all collection
+
+Lets also export this Collection as JSON so that you can import directly in 
+POSTMAN
+
+Lets get strat with real talk i.e
+
+HTML CRUD Operation with pure JS
+Even though our template contain jquery but we will not use jquery at all
+
+Only pure javascript
+
+
+Lets start
+
+Let do the get first
+
+So we will get records from the below api
+
+
+http://localhost:1337/api/todos
+
+So will start with script tag
+Now for api calling 
+
+We can use
+1. Built-in XMLHTTPRequest Class (Very Outdated)
+2. Built-in Fetch API (Very Latest and Advanced)
+
+We will use Fetch Api for APi calling in this part
+
+fetch('url') method will return the Promise Object
+
+so we will handle the promise object with then catch and finally block
+
+so basic syntext is
+PO.then().then().then().catch().finally();
+
+We can use two then block in a fetch api.
+Even thought we can use as many as we want but we only need two
+
+so first then block will parse the JSON data
+second then block will read the parsed JSON data
+
+we also dont need a finally block in a PO chain
+
+
+Up the data is comming up
+
+We will append this data to tbody
+
+So remove the hardcode data inside the tbody
+
+lets leave only one tr 
+
+We will remove
+Email
+Address	
+Phone
+
+
+
+Now i am going to teach very import topic i.e
+
+DOM Traversing
+
+1. Parent to child
+		querySelector() method
+2. Child to parent
+		closest() method
+
+Lets understand the table structure first
+
+Also most important thing to remember here is 
+
+we are dynamically collectin the html and after that we are putting in DOM
+
+SO dynamically gernated html element has to access with diffent way
+
+Let me show you guys
+
+Lets take a small break :)
+
+Welcome back to 2nd part of
+
+HTML CRUD Operation with PUre Javascript 
+
+
+
+
+
+
+
+
+
 
 
 
