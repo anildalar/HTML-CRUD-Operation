@@ -1,0 +1,25 @@
+HTML CRUD Operation with Pure Javascript
+
+We need
+1. Ready Made HTML Template with form and table
+2. Some Rest API (We will use Strapi)
+
+Lets get started guys :)
+
+1. Ready made html templete
+https://codepen.io/QuocHa/pen/YpveoJ
+
+No we will not use the above templete becuase that is angular template
+
+we need pure html templte
+
+Lets find some one :)
+
+I Found it
+https://codepen.io/zic72/pen/BayvgZo
+
+This above templete actually using bootstrap
+
+let get this bootstrap in
+
+We have added bootstrap file in the templete
