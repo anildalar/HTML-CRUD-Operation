@@ -277,6 +277,27 @@ ok :)
 
 
 
+element.click();
+
+Thats it
+
+
+There is a problem
+Table is not refresh
+
+We want to add without refresh
+
+
+Completed.
+
+I hope you guys will like the video.
+
+Please subscribe the channel for more upcomming awesome videos
+
+:)
+
+
+
 
 
 
