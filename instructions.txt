@@ -261,7 +261,19 @@ Welcome back to 2nd part of
 HTML CRUD Operation with PUre Javascript 
 
 
+Welcome to HTML CRUD Operation with PUre Javascript  Part 3
 
+Today we complete the Create functinality
+Lets start
+
+Open the postman
+
+Now dismiss the add form
+
+How to dissmiss the model programatically in bootstrap 5
+
+But we dont want to use jquery we only want to do with pure javascript
+ok :)
 
 
 

@@ -34,7 +34,7 @@
             </div>
           </div>
         </div>
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover mytable">
           <thead>
             <tr>
               <th>
@@ -84,21 +84,10 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" required />
+                <label>Content</label>
+                <textarea class="form-control mycontent" name="content" required ></textarea>
               </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" required />
-              </div>
-              <div class="form-group">
-                <label>Address</label>
-                <textarea class="form-control" required></textarea>
-              </div>
-              <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" required />
-              </div>
+              
             </div>
             <div class="modal-footer">
               <input
@@ -107,7 +96,7 @@
                 data-bs-dismiss="modal"
                 value="Cancel"
               />
-              <input type="submit" class="btn btn-success" value="Add" />
+              <input type="submit" class="btn btn-success addContent" value="Add" />
             </div>
           </form>
         </div>
@@ -189,6 +178,7 @@
     <script src="./js/script.js"></script>
 
     <script>
+        let mytable = document.querySelector('table.mytable');
         let baseUrl = 'http://localhost:1337'; //this is our base address
         fetch(baseUrl+'/api/todos')
         .then((res)=>{ return res.json() })
@@ -288,14 +278,14 @@
             if(action === 'edit'){
                 var content = localStorage.getItem('content');
                 console.log('content',content);
-                document.querySelector('div#editEmployeeModal textarea').innerHTML = content;
+                document.querySelector('div#editEmployeeModal textarea').value = content;
             }
         }
         document.querySelector('input.update').onclick = (e)=>{
             e.preventDefault(); //stop the reloading
             console.log('Testing');
             
-            var content = e.target.closest('form').querySelector('textarea').innerHTML;
+            var content = e.target.closest('form').querySelector('textarea').value;
             console.log('textarea content',content);
             let updateObject = {
                 "data": {
@@ -313,6 +303,8 @@
             .then(res=>res.json()) // JSON Parsing
             .then(data=>{
                 console.log(data);
+                e.target.closest('div#editEmployeeModal').querySelector('button.close').click();
+                window.location.reload();
             }) //parsed data
             .catch(e=>console.log(e));
 
@@ -332,10 +324,95 @@
             .then(data=>{
                 console.log(data);
                 e.target.closest('div#deleteEmployeeModal').remove();
+                window.location.reload();
             })
             .catch(e=>console.log(e));
             
             console.log('OK');
+        }
+
+        document.querySelector('.addContent').onclick = function(e){
+          //lets stop this reloading of page when
+          e.preventDefault();
+
+          //alert('okokokokok');
+          console.log(document.querySelector('.mycontent').value)
+          //For Textarea we will use value property not innerHTML
+
+          var content = document.querySelector('.mycontent').value;
+          //alert('content is '+content);
+
+          let createObject = {
+            "data": {
+              "content": content
+            }
+          };
+
+          //Now our create Rest API
+          fetch(baseUrl+`/api/todos`,{
+            method:"POST",
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body:JSON.stringify(createObject)
+          })
+          .then(res=>res.json())
+          .then(d=>{
+            console.log(d);
+            console.log(d.data.id);
+            console.log(d.data.attributes.content);
+
+            //We are recing everything in this d variable
+            mytable.querySelector('tbody').innerHTML += `<tr>  
+              <td>
+              <span class="custom-checkbox">
+                  <input
+                  type="checkbox"
+                  id="checkbox1"
+                  name="options[]"
+                  value="`+(d.data.id)+`"
+                  />
+                  <label for="checkbox1"></label>
+              </span>
+              </td>
+              <td>`+ d.data.attributes.content +`</td>
+              <td>
+              <a 
+                  href="#editEmployeeModal"
+                  class="edit"
+                  data-bs-toggle="modal"
+                  data-id="`+(d.data.id)+`"
+                  onclick="handleClick(this)"
+                  ><i class="material-icons" data-bs-toggle="tooltip" title="Edit"
+                  >&#xE254;</i
+                  ></a
+              >
+              <a
+                  href="#deleteEmployeeModal"
+                  class="delete"
+                  data-id="`+(d.data.id)+`"
+                  onclick="handleClick(this,'delete')"
+                  data-bs-toggle="modal"
+                  ><i
+                  class="material-icons"
+                  data-bs-toggle="tooltip"
+                  title="Delete"
+                  >&#xE872;</i
+                  ></a
+              >
+              </td>
+          </tr>`;
+
+            e.target.closest('div#addEmployeeModal').querySelector('button.close').click();
+           
+            
+            alert('Inserted successfully');
+
+          })
+          .catch(e=>console.log(e));
+          
+
+
         }
     </script>
 </body>
